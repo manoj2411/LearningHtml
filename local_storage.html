@@ -1,0 +1,21 @@
+<!DOCTYPE htlm>
+<html>
+<head>
+  <title>Local Storage demo</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <input class='from_ls'>
+
+    <script>
+        (function () {
+          $(document).on('keyup', '.from_ls', function () {
+            localStorage.setItem('klass-from_ls', $(this).val())
+          })
+          $('.from_ls').val(localStorage.getItem('klass-from_ls'))
+        })()
+    </script>
+
+</body>
+</html>

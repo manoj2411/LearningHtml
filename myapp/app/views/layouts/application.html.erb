@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Myapp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+  <ul>
+<!--
+    <li> <%= link_to 'home', '/' %><br> </li>
+    <li> <%= link_to 'about', about_path %><br> </li>
+    <li> <%= link_to 'contact', contact_path %> </li>
+     -->
+    <li>
+      <a href="http://html5readiness.com/assets/HTML5_Logo.svg" title="HTML5 logo" data-url="html5"> Html 5</a>
+    <li>
+      <a href="http://cloudproxy.sucuri.net/images/wordpress.jpg" title="WorldPress loga" data-url="wordpress" > WordPress</a>
+    <li>
+      <a href="http://www.userlogos.org/files/logos/jumpordie/tutsplus_02.png" title="TutPlus logi" data-url="tutplus"> Tut plus</a>
+  </ul>
+
+
+  <div class="result">
+    <script id="template" type="manoj">
+      <h2>{{title}}</h2>
+      <img src="{{imgSrc}}" alt="{{title}}">
+    </script>
+  </div>
+
+
+  <script>
+    ;(function() {
+
+      var Viewer = {
+        template: $('#template').html(),
+        init: function() {
+          $('ul').on('click', 'a', function(e) {
+            Viewer.applyTemplate(this);
+            Viewer.updateHistory(this);
+            e.preventDefault();
+          });
+        },
+
+        applyTemplate: function(data) {
+          var template = this.template.replace(/{{title}}/g, data.title).replace(/{{imgSrc}}/g, data.href);
+          // console.log(template);
+          $('.result').html(template);
+        },
+        updateHistory: function(data) {
+          var dataToSave = {
+            title: data.title,
+            href: data.href,
+            url: data.dataset.url
+          };
+          history.pushState(
+              dataToSave,
+              dataToSave.title,
+              dataToSave.url
+            );
+        }
+
+      };
+
+      Viewer.init();
+
+    })();
+  </script>
+
+
+
+
+  <script>
+    window.addEventListener('popstate', function (e) {
+      console.log(e);
+    });
+
+    // history.pushState(
+    //     // data
+    //     // title
+    //     // url
+    //     'some data',
+    //     'My page title',
+    //     'may-new-page'
+    //   );
+
+  </script>
+</body>
+</html>
